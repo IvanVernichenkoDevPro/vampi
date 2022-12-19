@@ -17,6 +17,17 @@ def get_all_books():
     return_value = jsonify({'Books': Book.get_all_books()})
     return return_value
 
+def get_my_books():
+    resp = token_validator(request.headers.get('Authorization'))
+    if "expired" in resp:
+        return Response(error_message_helper(resp), 401, mimetype="application/json")
+    elif "Invalid token" in resp:
+        return Response(error_message_helper(resp), 401, mimetype="application/json")
+    else:
+        user = User.query.filter_by(username=resp).first()
+        
+        return_value = jsonify({'Books': Book.get_my_books(user=user)})
+        return return_value
 
 def add_new_book():
     request_data = request.get_json()
