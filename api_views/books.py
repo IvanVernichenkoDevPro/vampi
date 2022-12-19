@@ -26,8 +26,7 @@ def get_my_books():
     else:
         user = User.query.filter_by(username=resp).first()
         
-        return_value = jsonify({'Books': Book.get_my_books(user=user)})
-        return return_value
+        return jsonify({'Books': Book.get_my_books(user=user)})
 
 def add_new_book():
     request_data = request.get_json()
