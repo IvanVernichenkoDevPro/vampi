@@ -8,6 +8,7 @@ from models.user_model import User
 from models.books_model import Book
 from app import vuln
 
+import logging
 
 def error_message_helper(msg):
     return '{ "status": "fail", "message": "' + msg + '"}'
@@ -18,6 +19,7 @@ def get_all_books():
     return return_value
 
 def get_my_books():
+    logging.error(str(request.headers))
     resp = token_validator(request.headers.get('Authorization'))
     if "expired" in resp:
         return Response(error_message_helper(resp), 401, mimetype="application/json")

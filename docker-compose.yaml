@@ -7,3 +7,8 @@ services:
    - 8000:5000
   environment:
    - vulnerable=1
+   - tokentimetolive=36600
+  volumes:
+   - ./api_views:/vampi/api_views
+   - ./models:/vampi/models 
+
