@@ -120,7 +120,7 @@ def update_email(username):
     elif "Invalid token" in resp:
         return Response(error_message_helper(resp), 401, mimetype="application/json")
     else:
-        user = User.query.filter_by(username=resp).first()
+        user = User.query.filter_by(username=username).first()
         if vuln:  # Regex DoS
             match = re.search(
                 r"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@{1}([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$",
